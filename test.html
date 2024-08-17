@@ -1,0 +1,258 @@
+<html lang="en" class="js csstransitions"><head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bob Varnell's Photo Gallery</title>
+	<meta name="description" content="A gallery of Robert (Bob) Varnell's wonderful photos.">
+	<meta name="keywords" content="photo, photograph, gallery, design">
+	<meta name="author" content="Software Odyssey">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/gallery.css">
+	<link rel="stylesheet" type="text/css" href="css/gallery-style2.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100;400;700&amp;family=Prosto+One&amp;display=swap" rel="stylesheet">
+
+	<script src="js/modernizr-custom.js"></script>
+	
+<style>
+.filter-controls ul li {
+	font-size: 17px;
+	color: #888888;
+	display: inline-block;
+	list-style: none;
+	margin-right: 60px;
+	position: relative;
+	cursor: pointer;
+}
+
+.filter-controls ul li.active {
+	color: #ffffff;
+	background: #acac9d;
+	padding: 4px 10px 2px 10px;
+}
+
+
+.filter-controls ul li:after {
+	position: absolute;
+	right: -33px;
+	top: -1px;
+	content: "|";
+	color: #d7d7d7;
+}
+
+.filter-controls ul li:last-child {
+	margin-right: 0;
+}
+
+.filter-controls ul li:last-child:after {
+	display: none;
+}
+
+</style>
+	
+</head>
+
+<body class="demo-2">
+	<div class="container">
+		<header class="codrops-header">
+			<nav class="codrops-demos">
+				<a class="menu__item" href="index.html">Home</a>
+				<a class="menu__item current-demo" href="#">Gallery</a>
+				<a class="menu__item" href="about.html">About</a>
+			</nav>
+			
+			<h1>Bob Varnell <span>Photography</span></h1>
+			
+                    <div class="filter-controls">
+                        <ul>
+                            <li class="active" data-filter="*">View All</li>
+                            <li data-filter=".landscape">Landscape</li>
+                            <li data-filter=".wildlife">Wildlife</li>
+                        </ul>
+                    </div>
+		</header>
+		<div class="content">
+			<div class="grid" style="position: relative; height: 44px;">
+				<div id="vue-app">
+					<div>
+						<div class="grid__item wildlife" data-size="1280x1131" style="position: absolute; left: 0px; top: 0px;">
+							<a class="img-wrap" href="img/original/Stones_of_Stenness_Orkney_Islands.jpg"><img alt="img" src="img/thumbs/Stones_of_Stenness_Orkney_Islands.jpg">
+								<div class="description description--grid">
+									<h3>Stones of Stenness Orkney Islands</h3>
+									<p>Duis vel iaculis aliquam faucibus feugiat tempor ante fusce netus laoreet per fusce.</p>
+									<div class="details">
+										<ul>
+											<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
+											<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>
+											<li><i class="icon icon-aperture"></i><span>ƒ/5.6</span></li>
+											<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
+											<li><i class="icon icon-iso"></i><span>80</span></li>
+										</ul>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div><div>
+						<div class="grid__item wildlife" data-size="1280x1131" style="position: absolute; left: 0px; top: 0px;">
+							<a class="img-wrap" href="img/original/Bald_Eagle.jpg"><img alt="img" src="img/thumbs/Bald_Eagle.jpg">
+								<div class="description description--grid">
+									<h3>Bald Eagle</h3>
+									<p>Mi a aliquam dictum tellus mollis pellentesque aptent nullam odio, velit sem et hac lacus erat cras arcu placerat.</p>
+									<div class="details">
+										<ul>
+											<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
+											<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>
+											<li><i class="icon icon-aperture"></i><span>ƒ/5.6</span></li>
+											<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
+											<li><i class="icon icon-iso"></i><span>80</span></li>
+										</ul>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+			<div class="preview">
+				<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
+				<div class="description description--preview"></div>
+			</div>
+			<!-- /preview -->
+	</div>
+	<!-- /content -->
+	<footer>
+			© <script>document.write(new Date().getFullYear());</script>2024&nbsp;All Rights Reserved Bob Varnell | Quinstant.com<br>
+			by <a href="http://www.softwareodyssey.com" target="_blank">Software Odyssey</a><a>
+	</a></footer><a>
+	
+	<!-- /container -->
+	
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/classie.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+	<script src="js/main.js"></script>
+
+    <script type="module">
+      import { createApp } from "https://unpkg.com/petite-vue?module";
+
+      const jsonData = [
+		{ category: "wildlife",
+		  original: "Stones_of_Stenness_Orkney_Islands.jpg",
+		  thumb: "Stones_of_Stenness_Orkney_Islands.jpg",
+		  title: "Stones of Stenness Orkney Islands",
+		  desc: "Duis vel iaculis aliquam faucibus feugiat tempor ante fusce netus laoreet per fusce.",
+		  camera: "Canon PowerShot S95",
+		  focal: "22.5mm",
+		  aperture: "5.6",
+		  exposure: "1/1000",
+		  iso: "80" },
+		{ category: "wildlife",
+		  original: "Bald_Eagle.jpg",
+		  thumb: "Bald_Eagle.jpg",
+		  title: "Bald Eagle",
+		  desc: "Mi a aliquam dictum tellus mollis pellentesque aptent nullam odio, velit sem et hac lacus erat cras arcu placerat.",
+		  camera: "Canon PowerShot S95",
+		  focal: "22.5mm",
+		  aperture: "5.6",
+		  exposure: "1/1000",
+		  iso: "80" },
+      ];
+
+      createApp({
+        items: jsonData,
+      }).mount("#vue-app");
+    </script>
+	
+	<script>
+		imagesLoaded(".content", () => document.body.classList.remove('loading'));
+		
+		///////////////////////
+		//
+		var elem = document.querySelector('.grid');
+		var iso = new Isotope( elem, {
+		  // options
+		  itemSelector: '.grid__item',
+		  layoutMode: 'fitRows'
+		});
+
+		$(".filter-controls li").on('click', function() {
+			var filterData = $(this).attr("data-filter");
+
+			$(".grid").isotope({
+				filter: filterData,
+			});
+
+			$(".filter-controls li").removeClass('active');
+			$(this).addClass('active');
+		});
+
+		///////////////////////
+		//
+		(function() {
+			var support = { transitions: Modernizr.csstransitions },
+				// transition end event name
+				transEndEventNames = { 'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend' },
+				transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+				onEndTransition = function( el, callback ) {
+					var onEndCallbackFn = function( ev ) {
+						if( support.transitions ) {
+							if( ev.target != this ) return;
+							this.removeEventListener( transEndEventName, onEndCallbackFn );
+						}
+						if( callback && typeof callback === 'function' ) { callback.call(this); }
+					};
+					if( support.transitions ) {
+						el.addEventListener( transEndEventName, onEndCallbackFn );
+					}
+					else {
+						onEndCallbackFn();
+					}
+				};
+
+			new GridFx(document.querySelector('.grid'), {
+				imgPosition : {
+					x : -0.5,
+					y : 1
+				},
+				onOpenItem : function(instance, item) {
+					instance.items.forEach(function(el) {
+						if(item != el) {
+							var delay = Math.floor(Math.random() * 50);
+							el.style.WebkitTransition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), -webkit-transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+							el.style.transition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+							el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
+							el.style.transform = 'scale3d(0.1,0.1,1)';
+							el.style.opacity = 0;
+						}
+					});
+				},
+				onCloseItem : function(instance, item) {
+					instance.items.forEach(function(el) {
+						if(item != el) {
+							el.style.WebkitTransition = 'opacity .4s, -webkit-transform .4s';
+							el.style.transition = 'opacity .4s, transform .4s';
+							el.style.WebkitTransform = 'scale3d(1,1,1)';
+							el.style.transform = 'scale3d(1,1,1)';
+							el.style.opacity = 1;
+
+							onEndTransition(el, function() {
+								el.style.transition = 'none';
+								el.style.WebkitTransform = 'none';
+							});
+						}
+					});
+				}
+			});
+		})();
+	</script>
+
+
+
+</a></body></html>

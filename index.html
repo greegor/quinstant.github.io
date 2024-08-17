@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Bob Varnell Photography</title>
+		<meta name="description" content="A gallery of Robert (Bob) Varnell's wonderful photos." />
+		<meta name="keywords" content="photo, photograph, gallery, design" />
+		<meta name="author" content="Software Odyssey" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/home.css" />
+		<link rel="stylesheet" type="text/css" href="css/home-switch.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100;400;700&family=Prosto+One&display=swap" rel="stylesheet">
+
+		<script>document.documentElement.className = 'js';</script>
+	</head>
+	
+	<body class="demo-switch loading">
+		<main>
+			<div class="content">
+				<header class="content__header">
+					<h2 class="content__title">Bob Varnell <span>Photography</span></h2>
+				</header>
+				<div class="slideshow">
+					<div id="slide-1" class="slide" style="background-image: url(img/coverguy.png)"></div>
+					<div class="pieces" style="background-image: url(img/coverguy.png)"></div>
+				</div>
+				<nav class="menu">
+					<div>Welcome to Quinstant</div>
+					<a class="menu__item menu__item--current" href="#slide-1" data-image="img/2d.jpg"></a>
+					<a class="menu__item" href="gallery.html"><span>View My Gallery</span></a> 
+					<a class="menu__item" href="about.html"><span>About Me</span></a>
+				</nav>
+			</div>
+		</main>
+		<footer>
+				&copy; <script>document.write(new Date().getFullYear());</script>&nbsp;All Rights Reserved Bob Varnell | Quinstant.com<br/>
+				by <a href="http://www.softwareodyssey.com" target="_blank">Software Odyssey<a/>
+		</footer>
+		
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<script src="js/anime.min.js"></script>
+		<script src="js/home.js"></script>
+		<script>
+		{
+			imagesLoaded(document.body, { background: true }, () => document.body.classList.remove('loading'));
+			
+			const menuItems = Array.from(document.querySelectorAll('.menu > .menu__item'));
+			
+			const piecesObj = new Pieces(document.querySelector('.slideshow > .pieces'), {
+				pieces: {rows: 14, columns: 12},
+				delay: [0,40],
+				hasTilt: true,
+				tilt: {
+					maxRotationX: -1, 
+					maxRotationY: -1, 
+					maxTranslationX: -5, 
+					maxTranslationY: -2
+				}
+			});
+			
+			let isAnimating = false;
+			let current = 0;
+
+			const openImage = (ev, item, pos) => {
+				ev.preventDefault();
+				if ( isAnimating || current === pos ) {
+					return false;
+				}
+				isAnimating = true;
+				menuItems[current].classList.remove('menu__item--current');
+				current = pos;
+				menuItems[current].classList.add('menu__item--current');
+				const imgsrc = item.dataset.image;
+
+				piecesObj.animate({
+					duration: 200,
+					easing: 'easeOutQuad',
+					delay: (t,i,l) => {
+						return parseInt(t.dataset.row) * parseInt(t.dataset.delay);
+					},
+					translateX: (t,i) => {
+						return anime.random(-50,50)+'px';
+					},
+					translateY: (t,i) => { 
+						return anime.random(-800,-200)+'px';
+					},
+					rotateZ: (t,i) => { 
+						return anime.random(-45,45)+'deg';
+					},
+					opacity: 0,
+					complete: () => {
+						piecesObj.setImage(imgsrc);
+
+						piecesObj.animate({
+							duration: 500,
+							easing: [0.3,1,0.3,1],
+							delay: (t,i,l) => {
+								return parseInt(t.dataset.row) * parseInt(t.dataset.delay);
+							},
+							translateX: 0,
+							translateY: () => {
+								return [anime.random(200,800)+'px','0px'];
+							},
+							rotateZ: 0,
+							opacity: {
+								value: 1,
+								duration: 500,
+								easing: 'linear'
+							},
+							complete: () => {
+								isAnimating = false;
+								window.location.href = item.href;
+							}
+						});
+					}
+				});
+			};
+
+			menuItems.forEach((item,pos) => item.addEventListener('click', (ev) => openImage(ev,item,pos)));
+		}
+		</script>
+	</body>
+</html>

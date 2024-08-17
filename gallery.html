@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Bob Varnell's Photo Gallery</title>
+	<meta name="description" content="A gallery of Robert (Bob) Varnell's wonderful photos." />
+	<meta name="keywords" content="photo, photograph, gallery, design" />
+	<meta name="author" content="Software Odyssey" />
+	<link rel="shortcut icon" href="favicon.ico">
+	
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/gallery.css" />
+	<link rel="stylesheet" type="text/css" href="css/gallery-style2.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100;400;700&family=Prosto+One&display=swap" rel="stylesheet">
+
+	<script src="js/modernizr-custom.js"></script>
+	
+<style>
+.filter-controls ul li {
+	font-size: 17px;
+	color: #888888;
+	display: inline-block;
+	list-style: none;
+	margin-right: 60px;
+	position: relative;
+	cursor: pointer;
+}
+
+.filter-controls ul li.active {
+	color: #ffffff;
+	background: #acac9d;
+	padding: 4px 10px 2px 10px;
+}
+
+
+.filter-controls ul li:after {
+	position: absolute;
+	right: -33px;
+	top: -1px;
+	content: "|";
+	color: #d7d7d7;
+}
+
+.filter-controls ul li:last-child {
+	margin-right: 0;
+}
+
+.filter-controls ul li:last-child:after {
+	display: none;
+}
+
+</style>
+	
+</head>
+
+<body class="demo-2 ~~loading">
+	<div class="container">
+		<header class="codrops-header">
+			<nav class="codrops-demos">
+				<a class="menu__item" href="index.html">Home</a>
+				<a class="menu__item current-demo" href="#">Gallery</a>
+				<a class="menu__item" href="about.html">About</a>
+			</nav>
+			
+			<h1>Bob Varnell <span>Photography</span></h1>
+			
+                    <div class="filter-controls">
+                        <ul>
+                            <li class="active" data-filter="*">View All</li>
+                            <li data-filter=".landscape">Landscape</li>
+                            <li data-filter=".wildlife">Wildlife</li>
+                        </ul>
+                    </div>
+		</header>
+
+		<div class="content">
+		
+			<div class="grid">
+			</div>
+			<!-- /grid -->
+			
+			<div class="preview">
+				<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
+				<div class="description description--preview"></div>
+			</div>
+			<!-- /preview -->
+		</div>
+		<!-- /content -->
+	<footer>
+			&copy; <script>document.write(new Date().getFullYear());</script>&nbsp;All Rights Reserved Bob Varnell | Quinstant.com<br/>
+			by <a href="http://www.softwareodyssey.com" target="_blank">Software Odyssey<a/>
+	</footer>
+	</div>
+	<!-- /container -->
+	
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/classie.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+	<script src="js/main.js"></script>
+	
+	
+	<script src="data.js"></script>
+
+<script type="text/javascript">
+	///////////////////////
+	// load grid data from json (js file)
+	var html = "";
+	jsonData.forEach(function(val) {
+	  const keys = Object.keys(val);
+	  keys.forEach(function(key) {
+		// key, val[key]
+		if (key === "category") {
+			html += '<div class="grid__item '+ val['category'] +'" data-size="800x533">';
+				html += '<a href="img/original/' + val['filename'] + '" class="img-wrap"><img src="img/thumbs/' + val['filename'] + '" alt="' + val['title'] + '" />';
+					html += '<div class="description description--grid">';
+						html += '<h3>' + val['title'] + '</h3>';
+						html += (val['desc'] != null ? '<p>' + val['desc'] + '</p>' : '');
+						html += '<div class="details">';
+							html += '<ul>';
+								html += (val['camera']   != null ? '<li><i class="icon icon-camera">       </i><span>' + val['camera']   + '</span></li>' : '');
+								html += (val['focal']    != null ? '<li><i class="icon icon-focal_length"> </i><span>' + val['focal']    + '</span></li>' : '');
+								html += (val['aperture'] != null ? '<li><i class="icon icon-aperture">     </i><span>&fnof;' + val['aperture'] + '</span></li>' : '');
+								html += (val['exposure'] != null ? '<li><i class="icon icon-exposure_time"></i><span>' + val['exposure'] + '</span></li>' : '');
+								html += (val['iso']      != null ? '<li><i class="icon icon-iso">          </i><span>' + val['iso']      + '</span></li>' : '');
+							html += '</ul>';
+						html += '</div>';
+					html += '</div>';
+				html += '</a>';
+			html += '</div><br>\n';
+		}
+	  });
+	});
+	
+	// fill in the grid data
+	$(".grid").html(html);
+	console.log(html);
+
+	imagesLoaded(".content", () => document.body.classList.remove('loading'));
+	
+	///////////////////////
+	//
+	var elem = document.querySelector('.grid');
+	var iso = new Isotope( elem, {
+	  // options
+	  itemSelector: '.grid__item',
+	  layoutMode: 'fitRows'
+	});
+
+	$(".filter-controls li").on('click', function() {
+		var filterData = $(this).attr("data-filter");
+
+		$(".grid").isotope({
+			filter: filterData,
+		});
+
+		$(".filter-controls li").removeClass('active');
+		$(this).addClass('active');
+	});
+
+	///////////////////////
+	//
+	(function() {
+		var support = { transitions: Modernizr.csstransitions },
+			// transition end event name
+			transEndEventNames = { 'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend' },
+			transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+			onEndTransition = function( el, callback ) {
+				var onEndCallbackFn = function( ev ) {
+					if( support.transitions ) {
+						if( ev.target != this ) return;
+						this.removeEventListener( transEndEventName, onEndCallbackFn );
+					}
+					if( callback && typeof callback === 'function' ) { callback.call(this); }
+				};
+				if( support.transitions ) {
+					el.addEventListener( transEndEventName, onEndCallbackFn );
+				}
+				else {
+					onEndCallbackFn();
+				}
+			};
+
+		new GridFx(document.querySelector('.grid'), {
+			imgPosition : {
+				x : -0.5,
+				y : 1
+			},
+			onOpenItem : function(instance, item) {
+				instance.items.forEach(function(el) {
+					if(item != el) {
+						var delay = Math.floor(Math.random() * 50);
+						el.style.WebkitTransition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), -webkit-transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+						el.style.transition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+						el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
+						el.style.transform = 'scale3d(0.1,0.1,1)';
+						el.style.opacity = 0;
+					}
+				});
+			},
+			onCloseItem : function(instance, item) {
+				instance.items.forEach(function(el) {
+					if(item != el) {
+						el.style.WebkitTransition = 'opacity .4s, -webkit-transform .4s';
+						el.style.transition = 'opacity .4s, transform .4s';
+						el.style.WebkitTransform = 'scale3d(1,1,1)';
+						el.style.transform = 'scale3d(1,1,1)';
+						el.style.opacity = 1;
+						
+						onEndTransition(el, function() {
+							el.style.transition = 'none';
+							el.style.WebkitTransform = 'none';
+						});
+					}
+				});
+			}
+		});
+	})();
+</script>
+	
+</body>
+
+</html>
